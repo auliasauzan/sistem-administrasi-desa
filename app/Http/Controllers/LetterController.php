@@ -54,6 +54,11 @@ class LetterController extends Controller
         $request->validate([
             'resident_id' => 'required|exists:residents,id',
             'letter_type_id' => 'required|exists:letter_types,id',
+        ], [
+            'resident_id.required' => 'Penduduk wajib dipilih',
+            'resident_id.exists' => 'Data penduduk tidak valid',
+            'letter_type_id.required' => 'Jenis surat wajib dipilih',
+            'letter_type_id.exists' => 'Data jenis surat tidak valid',
         ]);
 
         Letter::create([
@@ -80,6 +85,9 @@ class LetterController extends Controller
         $request->validate([
             'status' => 'required|in:approved,rejected',
             'note' => 'nullable|string',
+        ], [
+            'status.required' => 'Status wajib dipilih',
+            'status.in' => 'Status tidak valid',
         ]);
 
         $letter->update([

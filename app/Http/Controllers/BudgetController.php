@@ -44,6 +44,15 @@ class BudgetController extends Controller
             'amount' => 'required|numeric|min:0',
             'year' => 'required|integer|min:2000',
             'description' => 'required|string',
+        ], [
+            'budget_type.required' => 'Jenis anggaran wajib dipilih',
+            'budget_type.in' => 'Jenis anggaran tidak valid',
+            'category.required' => 'Kategori wajib diisi',
+            'amount.required' => 'Jumlah (Rp) wajib diisi',
+            'amount.numeric' => 'Jumlah harus berupa angka',
+            'year.required' => 'Tahun wajib diisi',
+            'year.integer' => 'Tahun harus berupa angka bulat',
+            'description.required' => 'Keterangan wajib diisi',
         ]);
 
         Budget::create($request->all());
@@ -69,6 +78,15 @@ class BudgetController extends Controller
             'amount' => 'required|numeric|min:0',
             'year' => 'required|integer|min:2000',
             'description' => 'required|string',
+        ], [
+            'budget_type.required' => 'Jenis anggaran wajib dipilih',
+            'budget_type.in' => 'Jenis anggaran tidak valid',
+            'category.required' => 'Kategori wajib diisi',
+            'amount.required' => 'Jumlah (Rp) wajib diisi',
+            'amount.numeric' => 'Jumlah harus berupa angka',
+            'year.required' => 'Tahun wajib diisi',
+            'year.integer' => 'Tahun harus berupa angka bulat',
+            'description.required' => 'Keterangan wajib diisi',
         ]);
 
         $budget->update($request->all());

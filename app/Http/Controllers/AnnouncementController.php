@@ -33,6 +33,12 @@ class AnnouncementController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'published_at' => 'required|date',
+        ], [
+            'title.required' => 'Judul pengumuman wajib diisi',
+            'title.max' => 'Judul pengumuman maksimal 255 karakter',
+            'content.required' => 'Isi pengumuman wajib diisi',
+            'published_at.required' => 'Tanggal publikasi wajib diisi',
+            'published_at.date' => 'Format tanggal tidak valid',
         ]);
 
         $villageOfficial = VillageOfficial::where('user_id', auth()->id())->first();
@@ -66,6 +72,12 @@ class AnnouncementController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'published_at' => 'required|date',
+        ], [
+            'title.required' => 'Judul pengumuman wajib diisi',
+            'title.max' => 'Judul pengumuman maksimal 255 karakter',
+            'content.required' => 'Isi pengumuman wajib diisi',
+            'published_at.required' => 'Tanggal publikasi wajib diisi',
+            'published_at.date' => 'Format tanggal tidak valid',
         ]);
 
         $announcement->update([

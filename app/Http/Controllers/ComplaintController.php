@@ -47,6 +47,11 @@ class ComplaintController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'photo_url' => 'nullable|url', // Using URL for photo simulation
+        ], [
+            'title.required' => 'Judul pengaduan wajib diisi',
+            'title.max' => 'Judul pengaduan maksimal 255 karakter',
+            'description.required' => 'Deskripsi pengaduan wajib diisi',
+            'photo_url.url' => 'URL foto tidak valid',
         ]);
 
         $resident = Resident::where('user_id', $user->id)->firstOrFail();
@@ -76,6 +81,9 @@ class ComplaintController extends Controller
 
         $request->validate([
             'status' => 'required|in:open,in_progress,resolved',
+        ], [
+            'status.required' => 'Status wajib dipilih',
+            'status.in' => 'Status tidak valid',
         ]);
 
         $complaint->update([

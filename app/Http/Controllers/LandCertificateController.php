@@ -48,6 +48,14 @@ class LandCertificateController extends Controller
             'certificate_number' => 'required|string|unique:land_certificates',
             'area_size' => 'required|numeric|min:0',
             'location' => 'required|string',
+        ], [
+            'owner_id.required' => 'Pemilik wajib dipilih',
+            'owner_id.exists' => 'Data pemilik tidak valid',
+            'certificate_number.required' => 'Nomor sertifikat wajib diisi',
+            'certificate_number.unique' => 'Nomor sertifikat sudah terdaftar',
+            'area_size.required' => 'Luas tanah wajib diisi',
+            'area_size.numeric' => 'Luas tanah harus berupa angka',
+            'location.required' => 'Lokasi wajib diisi',
         ]);
 
         LandCertificate::create($request->all());
@@ -73,6 +81,14 @@ class LandCertificateController extends Controller
             'certificate_number' => 'required|string|unique:land_certificates,certificate_number,' . $landCertificate->id,
             'area_size' => 'required|numeric|min:0',
             'location' => 'required|string',
+        ], [
+            'owner_id.required' => 'Pemilik wajib dipilih',
+            'owner_id.exists' => 'Data pemilik tidak valid',
+            'certificate_number.required' => 'Nomor sertifikat wajib diisi',
+            'certificate_number.unique' => 'Nomor sertifikat sudah terdaftar',
+            'area_size.required' => 'Luas tanah wajib diisi',
+            'area_size.numeric' => 'Luas tanah harus berupa angka',
+            'location.required' => 'Lokasi wajib diisi',
         ]);
 
         $landCertificate->update($request->all());

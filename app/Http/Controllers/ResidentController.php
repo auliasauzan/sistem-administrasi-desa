@@ -71,13 +71,14 @@ class ResidentController extends Controller
             'religion' => 'required|string',
             'occupation' => 'required|string',
         ], [
-            'family_id.required' => 'Pilih Kartu Keluarga',
+            'family_id.required' => 'Kepala Keluarga wajib dipilih',
+            'family_id.exists' => 'Data Kepala Keluarga tidak valid',
             'national_id.required' => 'NIK wajib diisi',
             'national_id.unique' => 'NIK sudah terdaftar',
             'full_name.required' => 'Nama lengkap wajib diisi',
             'birth_date.required' => 'Tanggal lahir wajib diisi',
-            'gender.required' => 'Jenis kelamin wajib diisi',
-            'religion.required' => 'Agama wajib diisi',
+            'gender.required' => 'Jenis kelamin wajib dipilih',
+            'religion.required' => 'Agama wajib dipilih',
             'occupation.required' => 'Pekerjaan wajib diisi',
         ]);
 

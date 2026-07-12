@@ -42,6 +42,15 @@ class VillageAssetController extends Controller
             'condition' => 'required|in:Baik,Rusak Ringan,Rusak Berat',
             'acquisition_date' => 'required|date',
             'location' => 'required|string|max:255',
+        ], [
+            'asset_code.required' => 'Kode aset wajib diisi',
+            'asset_code.unique' => 'Kode aset sudah terdaftar',
+            'name.required' => 'Nama aset wajib diisi',
+            'quantity.required' => 'Jumlah aset wajib diisi',
+            'quantity.integer' => 'Jumlah aset harus berupa angka',
+            'condition.required' => 'Kondisi wajib dipilih',
+            'acquisition_date.required' => 'Tanggal perolehan wajib diisi',
+            'location.required' => 'Lokasi wajib diisi',
         ]);
 
         VillageAsset::create($request->all());
@@ -68,6 +77,15 @@ class VillageAssetController extends Controller
             'condition' => 'required|in:Baik,Rusak Ringan,Rusak Berat',
             'acquisition_date' => 'required|date',
             'location' => 'required|string|max:255',
+        ], [
+            'asset_code.required' => 'Kode aset wajib diisi',
+            'asset_code.unique' => 'Kode aset sudah terdaftar',
+            'name.required' => 'Nama aset wajib diisi',
+            'quantity.required' => 'Jumlah aset wajib diisi',
+            'quantity.integer' => 'Jumlah aset harus berupa angka',
+            'condition.required' => 'Kondisi wajib dipilih',
+            'acquisition_date.required' => 'Tanggal perolehan wajib diisi',
+            'location.required' => 'Lokasi wajib diisi',
         ]);
 
         $villageAsset->update($request->all());

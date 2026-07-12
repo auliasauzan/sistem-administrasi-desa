@@ -32,6 +32,9 @@ class LetterTypeController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'requirements' => 'nullable|string',
+        ], [
+            'name.required' => 'Nama Surat wajib diisi',
+            'name.max' => 'Nama Surat maksimal 255 karakter',
         ]);
 
         LetterType::create($request->all());
@@ -53,6 +56,9 @@ class LetterTypeController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'requirements' => 'nullable|string',
+        ], [
+            'name.required' => 'Nama Surat wajib diisi',
+            'name.max' => 'Nama Surat maksimal 255 karakter',
         ]);
 
         $letterType->update($request->all());
