@@ -321,6 +321,14 @@
             @endif
 
             <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('complaint.*') ? '' : 'collapsed' }}"
+                    href="{{ route('complaint.index') }}">
+                    <i class='bx bx-message-error'></i>
+                    <span>Pengaduan Warga</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('setting.*') ? '' : 'collapsed' }}"
                     href="{{ route('setting.index') }}">
                     <i class='bx bx-cog'></i>

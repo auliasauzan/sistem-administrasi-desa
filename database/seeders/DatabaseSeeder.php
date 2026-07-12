@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             LetterTypeSeeder::class,
             LetterSeeder::class,
             LandCertificateSeeder::class,
+            ComplaintSeeder::class,
             SettingSeeder::class,
         ]);
 
