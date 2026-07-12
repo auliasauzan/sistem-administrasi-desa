@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/land_certificate', \App\Http\Controllers\LandCertificateController::class);
     Route::resource('/complaint', \App\Http\Controllers\ComplaintController::class);
     Route::resource('/budget', \App\Http\Controllers\BudgetController::class);
+    Route::resource('/village_asset', \App\Http\Controllers\VillageAssetController::class);
 
     Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
     Route::put('/setting/{setting}/update', [SettingController::class, 'update'])->name('setting.update');

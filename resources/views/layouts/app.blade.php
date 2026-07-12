@@ -318,6 +318,14 @@
                     <span>Sertifikat Tanah</span>
                 </a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('village_asset.*') ? '' : 'collapsed' }}"
+                    href="{{ route('village_asset.index') }}">
+                    <i class='bx bx-box'></i>
+                    <span>Inventaris Aset</span>
+                </a>
+            </li>
             @endif
 
             <li class="nav-item">
