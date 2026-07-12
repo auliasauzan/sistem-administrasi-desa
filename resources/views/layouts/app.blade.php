@@ -292,6 +292,24 @@
                 </a>
             </li>
 
+            @if (auth()->user()->role !== 'Warga')
+            <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('letter_type.*') ? '' : 'collapsed' }}"
+                    href="{{ route('letter_type.index') }}">
+                    <i class='bx bx-list-ul'></i>
+                    <span>Master Jenis Surat</span>
+                </a>
+            </li>
+            @endif
+
+            <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('letter.*') ? '' : 'collapsed' }}"
+                    href="{{ route('letter.index') }}">
+                    <i class='bx bx-envelope'></i>
+                    <span>Pengurusan Surat</span>
+                </a>
+            </li>
+
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('setting.*') ? '' : 'collapsed' }}"
                     href="{{ route('setting.index') }}">

@@ -29,6 +29,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('/family', \App\Http\Controllers\FamilyController::class);
     Route::resource('/resident', \App\Http\Controllers\ResidentController::class);
 
+    Route::resource('/letter_type', \App\Http\Controllers\LetterTypeController::class);
+    Route::resource('/letter', \App\Http\Controllers\LetterController::class);
+
     Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
     Route::put('/setting/{setting}/update', [SettingController::class, 'update'])->name('setting.update');
 });
