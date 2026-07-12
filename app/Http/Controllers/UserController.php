@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\VillageOfficial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
@@ -42,7 +43,9 @@ class UserController extends Controller
             'password' => 'required|min:8',
             'passwordconfirm' => 'required|same:password',
             'email' => 'required|email|lowercase|unique:users,email',
-            'avatar' => 'nullable|image|mimes:png,jpg,jpeg,svg|max:512'
+            'avatar' => 'nullable|image|mimes:png,jpg,jpeg,svg|max:512',
+            'position' => 'nullable|string',
+            'employee_id' => 'nullable|string'
         ], [
             'name.required' => 'Nama wajib diisi',
             'role.required' => 'Role wajib diisi',
@@ -68,7 +71,15 @@ class UserController extends Controller
 
             $validate['password'] = bcrypt($request->password);
             $validate['email_verified_at'] = now();
-            User::create($validate);
+            $user = User::create($validate);
+
+            if (in_array($request->role, ['Admin Desa', 'Perangkat Desa'])) {
+                VillageOfficial::create([
+                    'user_id' => $user->id,
+                    'position' => $request->position,
+                    'employee_id' => $request->employee_id,
+                ]);
+            }
 
             DB::commit();
             return to_route('user.index')->withSuccess('Data berhasil ditambahkan');
@@ -112,7 +123,9 @@ class UserController extends Controller
             'password' => 'nullable|min:8',
             'passwordconfirm' => 'nullable|same:password',
             'email' => 'required|email|lowercase|unique:users,email,' . $user->id,
-            'avatar' => 'nullable|image|mimes:png,jpg,jpeg,svg|max:512'
+            'avatar' => 'nullable|image|mimes:png,jpg,jpeg,svg|max:512',
+            'position' => 'nullable|string',
+            'employee_id' => 'nullable|string'
         ], [
             'name.required' => 'Nama wajib diisi',
             'role.required' => 'Role wajib diisi',
@@ -144,6 +157,18 @@ class UserController extends Controller
             }
             $user->update($validate);
 
+            if (in_array($request->role, ['Admin Desa', 'Perangkat Desa'])) {
+                VillageOfficial::updateOrCreate(
+                    ['user_id' => $user->id],
+                    [
+                        'position' => $request->position,
+                        'employee_id' => $request->employee_id,
+                    ]
+                );
+            } else {
+                $user->villageOfficial()->delete();
+            }
+
             DB::commit();
             return to_route('user.index')->withSuccess('Data berhasil diubah');
         } catch (\Exception $e) {
@@ -162,6 +187,9 @@ class UserController extends Controller
         try {
             $avatar = $user->avatar;
             
+            if ($user->villageOfficial) {
+                $user->villageOfficial()->delete();
+            }
             $user->delete();
 
             if ($avatar && Storage::disk('public')->exists($avatar)) {

@@ -12,14 +12,16 @@ class DashboardController extends Controller
     public function index()
     {
         $totalUsers = \App\Models\User::count();
-        $superadminCount = \App\Models\User::where('role', 'Superadmin')->count();
-        $adminCount = \App\Models\User::where('role', 'Admin')->count();
+        $adminDesaCount = \App\Models\User::where('role', 'Admin Desa')->count();
+        $perangkatDesaCount = \App\Models\User::where('role', 'Perangkat Desa')->count();
+        $wargaCount = \App\Models\User::where('role', 'Warga')->count();
 
         return view('dashboard.index', [
             'title' => 'Dashboard',
             'totalUsers' => $totalUsers,
-            'superadminCount' => $superadminCount,
-            'adminCount' => $adminCount,
+            'adminDesaCount' => $adminDesaCount,
+            'perangkatDesaCount' => $perangkatDesaCount,
+            'wargaCount' => $wargaCount,
         ]);
     }
 

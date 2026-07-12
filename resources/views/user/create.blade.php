@@ -71,8 +71,9 @@
                         <select class="form-select select2-default @error('role') is-invalid  @enderror" id="role"
                             name="role" required>
                             <option value="">Pilih Role</option>
-                            <option value="Superadmin" @selected(old('role') == 'Superadmin')>Superadmin</option>
-                            <option value="Admin" @selected(old('role') == 'Admin')>Admin</option>
+                            <option value="Admin Desa" @selected(old('role') == 'Admin Desa')>Admin Desa</option>
+                            <option value="Perangkat Desa" @selected(old('role') == 'Perangkat Desa')>Perangkat Desa</option>
+                            <option value="Warga" @selected(old('role') == 'Warga')>Warga</option>
                         </select>
                         @error('role')
                             <div class="invalid-feedback">
@@ -80,6 +81,22 @@
                             </div>
                         @enderror
                     </div>
+
+                    <div class="mb-3" id="village_officials_fields" style="display: none;">
+                        <div class="mb-3">
+                            <label for="position" class="form-label">Jabatan (Khusus Perangkat Desa)</label>
+                            <input class="form-control @error('position') is-invalid @enderror" type="text" id="position" name="position" value="{{ old('position') }}">
+                            @error('position')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="employee_id" class="form-label">NIP / NRP</label>
+                            <input class="form-control @error('employee_id') is-invalid @enderror" type="text" id="employee_id" name="employee_id" value="{{ old('employee_id') }}">
+                            @error('employee_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
 
                 </div>
             </div>
@@ -94,5 +111,25 @@
         </form>
 
     </div>
+
+    @push('scripts')
+        <script>
+            $(document).ready(function() {
+                function toggleFields() {
+                    const role = $('#role').val();
+                    if (role === 'Admin Desa' || role === 'Perangkat Desa') {
+                        $('#village_officials_fields').show();
+                    } else {
+                        $('#village_officials_fields').hide();
+                        $('#position').val('');
+                        $('#employee_id').val('');
+                    }
+                }
+                
+                $('#role').change(toggleFields);
+                toggleFields();
+            });
+        </script>
+    @endpush
 
 </x-app>

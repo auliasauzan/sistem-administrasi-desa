@@ -18,6 +18,7 @@
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Role</th>
+                        <th scope="col">Jabatan</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -28,6 +29,7 @@
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->role }}</td>
+                            <td>{{ $user->villageOfficial->position ?? '-' }}</td>
                             <td>
                                 <button type="button" class="btn btn-info btn-sm btn-detail"
                                     data-route="{{ route('user.show', $user) }}">
