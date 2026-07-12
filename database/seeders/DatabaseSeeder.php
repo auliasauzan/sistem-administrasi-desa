@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             ComplaintSeeder::class,
             BudgetSeeder::class,
             VillageAssetSeeder::class,
+            AnnouncementSeeder::class,
             SettingSeeder::class,
         ]);
 
