@@ -24,7 +24,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/edit', [DashboardController::class, 'edit'])->name('dashboard.edit');
     Route::put('/dashboard/update', [DashboardController::class, 'update'])->name('dashboard.update');
 
-    Route::resource('/user', UserController::class)->middleware('role:Superadmin');
+    Route::resource('/user', UserController::class)->middleware('role:Admin Desa');
+
+    Route::resource('/family', \App\Http\Controllers\FamilyController::class);
+    Route::resource('/resident', \App\Http\Controllers\ResidentController::class);
 
     Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
     Route::put('/setting/{setting}/update', [SettingController::class, 'update'])->name('setting.update');

@@ -277,6 +277,22 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('family.*') ? '' : 'collapsed' }}"
+                    href="{{ route('family.index') }}">
+                    <i class='bx bx-group'></i>
+                    <span>Keluarga</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('resident.*') ? '' : 'collapsed' }}"
+                    href="{{ route('resident.index') }}">
+                    <i class='bx bx-user'></i>
+                    <span>Penduduk</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('setting.*') ? '' : 'collapsed' }}"
                     href="{{ route('setting.index') }}">
                     <i class='bx bx-cog'></i>
