@@ -329,6 +329,14 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('budget.*') ? '' : 'collapsed' }}"
+                    href="{{ route('budget.index') }}">
+                    <i class='bx bx-pie-chart-alt-2'></i>
+                    <span>Anggaran & Transparansi</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('setting.*') ? '' : 'collapsed' }}"
                     href="{{ route('setting.index') }}">
                     <i class='bx bx-cog'></i>
