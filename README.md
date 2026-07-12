@@ -1,117 +1,97 @@
-# Admin Template (Laravel 13 + Tailwind 4)
+# Sistem Administrasi Desa (SiDesa)
 
-A professional and modern administrative dashboard template built with **Laravel 13** and **Bootstrap 5 (NiceAdmin Template)**. This project provides a solid foundation for building robust back-office applications with built-in user management, settings, and profile features.
+**SiDesa** adalah aplikasi Sistem Informasi Desa berbasis Web yang dibangun menggunakan Framework Laravel. Aplikasi ini dirancang untuk mendigitalisasi dan memudahkan proses administrasi, pendataan warga, serta pelayanan publik di tingkat desa.
 
-## 🚀 Fitur Utama
+Aplikasi ini sangat cocok digunakan oleh Kepala Desa, Perangkat Desa (Sekretaris, Kaur, Kadus), maupun langsung oleh Warga setempat secara mandiri (melalui hak akses pengguna masing-masing).
 
-- **Otentikasi & Keamanan**: Login, Logout, dan Middleware Role (Superadmin).
-- **Manajemen User**: CRUD (Create, Read, Update, Delete) data pengguna lengkap dengan foto profil (avatar).
-- **Manajemen Profil**: Halaman profil untuk setiap pengguna (Dashboard Show & Edit).
-- **Pengaturan Aplikasi**: Pengaturan nama aplikasi, logo, kata kunci, dan deskripsi SEO melalui dashboard.
-- **UI/UX Modern**: Menggunakan template NiceAdmin dengan integrasi:
-    - **DataTables**: Untuk tabel data yang interaktif.
-    - **SweetAlert2**: Untuk notifikasi yang cantik.
-    - **Select2**: Untuk dropdown yang lebih baik.
-    - **TinyMCE**: Untuk editor teks kaya.
-- **Ekspor Laporan**: Dukungan ekspor data ke format PDF (menggunakan `laravel-dompdf`).
-- **Lokalisasi**: Sudah dikonfigurasi menggunakan Bahasa Indonesia (`id`).
+---
 
-## 🎨 Kustomisasi Tema (Warna)
+## 🌟 Fitur Utama
 
-Template ini telah dimodifikasi agar warna tema utamanya sangat mudah diganti. Anda hanya perlu mengubah **CSS Variables** di satu tempat saja, dan seluruh elemen (Header, Footer, Tombol Primary, Sidebar Aktif, dll.) akan otomatis menyesuaikan.
+Terdapat 8 (delapan) pilar fitur utama yang disediakan oleh SiDesa:
 
-1. Buka file `resources/views/layouts/app.blade.php`.
-2. Cari bagian `<style>` di dalam tag `<head>`.
-3. Ubah kode Hex warna pada blok `:root`:
+1. **Autentikasi dan Manajemen Pengguna (Role-based)**
+   - Mendukung sistem masuk (*login*) dengan *role* spesifik: **Admin**, **Kepala Desa**, **Perangkat Desa**, dan **Warga**.
+   - Manajemen akun profil dan hak akses sesuai dengan perannya masing-masing.
 
-```css
-:root {
-    /* ====== UBAH WARNA TEMA DI SINI ====== */
-    --theme-bg: #7c3aed;    /* Warna utama tema (contoh: Ungu/Biru) */
-    --theme-hover: #6d28d9; /* Warna lebih gelap untuk efek hover tombol/menu */
-    --theme-text: #ffffff;  /* Warna teks di atas warna utama */
-    
-    --main-bg: #f6f9ff;     /* Warna background utama halaman konten */
-    /* ===================================== */
-}
+2. **Manajemen Data Penduduk dan Keluarga**
+   - Pendataan menyeluruh Kartu Keluarga (KK) dan Nomor Induk Kependudukan (NIK).
+   - Pengelolaan data demografi (nama, tanggal lahir, agama, pekerjaan, dsb).
+
+3. **Layanan Surat-Menyurat Digital**
+   - Warga dapat mengajukan permohonan berbagai jenis surat (misal: Surat Pengantar, Surat Keterangan Tidak Mampu, dsb) secara daring.
+   - Perangkat Desa memverifikasi dan menyetujui ajuan surat melalui sistem.
+
+4. **Pencatatan Sertifikat Tanah (Buku Tanah Desa)**
+   - Mendokumentasikan kepemilikan lahan atau aset properti milik warga maupun kas desa.
+   - Pencarian riwayat kepemilikan dan legalitas dokumen tanah.
+
+5. **Sistem Layanan Pengaduan Warga**
+   - Warga dapat melaporkan masalah (infrastruktur, keamanan, dsb) secara *real-time*.
+   - Dilengkapi pelacakan status penanganan pengaduan (*Menunggu*, *Diproses*, *Selesai*).
+
+6. **Transparansi Anggaran (Keuangan Desa)**
+   - Publikasi rencana penerimaan dan pengeluaran dana desa agar mudah diakses publik.
+   - Grafik realisasi vs anggaran tahunan pada dasbor utama.
+
+7. **Manajemen Inventaris (Aset Desa)**
+   - Pencatatan seluruh barang dan properti fasilitas umum milik instansi pemerintahan desa.
+   - Pengawasan terhadap kondisi aset (Baik/Rusak).
+
+8. **Papan Pengumuman Digital**
+   - Penyebaran informasi, sosialisasi program, dan berita terbaru dari balai desa yang dapat langsung dilihat warga pada beranda aplikasi.
+
+---
+
+## 🚀 Panduan Instalasi (Lokal)
+
+Ikuti langkah-langkah di bawah ini untuk menjalankan SiDesa pada mesin lokal (komputer) Anda:
+
+### 1. Kloning Repositori
+Buka terminal/Command Prompt dan jalankan perintah:
+```bash
+git clone https://github.com/auliasauzan/sistem-administrasi-desa.git
+cd sistem-administrasi-desa
 ```
-4. Simpan file, lalu muat ulang (refresh) halaman pada browser Anda.
 
-## 🔑 Kredensial Default
+### 2. Instalasi Dependensi (Composer)
+Pastikan Anda sudah menginstal PHP dan [Composer](https://getcomposer.org/).
+```bash
+composer install
+```
 
-Setelah menjalankan seeder, Anda dapat login menggunakan akun berikut:
+### 3. Konfigurasi Lingkungan (.env)
+Salin berkas konfigurasi *environment*:
+```bash
+cp .env.example .env
+```
+Lalu, buatlah basis data (database) kosong di MySQL/MariaDB (misalnya bernama `sidesa_db`).
+Buka berkas `.env` yang baru saja disalin dan sesuaikan kredensial basis data Anda:
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=sidesa_db
+DB_USERNAME=root
+DB_PASSWORD=
+```
+Jangan lupa *generate application key*:
+```bash
+php artisan key:generate
+```
 
-| Nama        | Email             | Password   | Role       |
-| ----------- | ----------------- | ---------- | ---------- |
-| Tamus Tahir | `tamus@gmail.com` | `password` | Superadmin |
-| Joh Doe     | `admin@gmail.com` | `password` | Admin      |
+### 4. Migrasi dan Seeding Database
+Jalankan migrasi tabel beserta *seeding* (data sampel bawaan) agar aplikasi siap digunakan.
+```bash
+php artisan migrate --seed
+```
 
-## 🛠️ Stack Teknologi
+### 5. Jalankan Server Lokal
+Nyalakan *development server* bawaan Laravel:
+```bash
+php artisan serve
+```
+Aplikasi kini dapat diakses melalui peramban (browser) di: `http://127.0.0.1:8000`.
 
-- **Backend**: PHP 8.3 & Laravel 13.0
-- **Frontend**: Bootstrap 5
-- **Database**: SQLite (default)
-- **Library Penting**:
-    - `barryvdh/laravel-dompdf`
-    - `laravel/tinker`
-    - `pestphp/pest` (Testing)
-
-## 💻 Instalasi Lokal
-
-Ikuti langkah-langkah berikut untuk menjalankan proyek di mesin lokal Anda:
-
-1. **Clone Repositori**:
-
-    ```bash
-    git clone <repository-url>
-    cd admin-template
-    ```
-
-2. **Instal Dependensi PHP**:
-
-    ```bash
-    composer install
-    ```
-
-3. **Instal Dependensi JavaScript**:
-
-    ```bash
-    npm install
-    ```
-
-4. **Konfigurasi Lingkungan**:
-   Salin file `.env.example` menjadi `.env` dan generate key:
-
-    ```bash
-    cp .env.example .env
-    php artisan key:generate
-    ```
-
-5. **Setup Database (SQLite)**:
-   Buat file database kosong dan jalankan migrasi beserta seeder:
-
-    ```bash
-    touch database/database.sqlite
-    php artisan migrate --seed
-    ```
-
-6. **Jalankan Aplikasi**:
-   Anda dapat menggunakan script setup yang sudah disediakan atau menjalankan server secara manual:
-
-    ```bash
-    # Menggunakan script internal
-    composer run dev
-
-    # ATAU menjalankan secara terpisah
-    php artisan serve
-    npm run dev
-    ```
-
-## 📝 Script Tambahan
-
-- `composer run setup`: Menjalankan instalasi lengkap (composer, npm, migrate, build).
-- `composer run test`: Menjalankan unit testing menggunakan Pest.
-
-## 📄 Lisensi
-
-Proyek ini bersifat open-source di bawah lisensi [MIT](https://opensource.org/licenses/MIT).
+---
+*Dibuat untuk mempermudah tata kelola administrasi pemerintahan desa di era digital.*
