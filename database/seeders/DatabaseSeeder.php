@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             FamilyResidentSeeder::class,
             LetterTypeSeeder::class,
             LetterSeeder::class,
+            LandCertificateSeeder::class,
             SettingSeeder::class,
         ]);
 

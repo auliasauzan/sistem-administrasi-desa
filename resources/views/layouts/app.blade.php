@@ -310,6 +310,16 @@
                 </a>
             </li>
 
+            @if (auth()->user()->role !== 'Warga')
+            <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('land_certificate.*') ? '' : 'collapsed' }}"
+                    href="{{ route('land_certificate.index') }}">
+                    <i class='bx bx-map-alt'></i>
+                    <span>Sertifikat Tanah</span>
+                </a>
+            </li>
+            @endif
+
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('setting.*') ? '' : 'collapsed' }}"
                     href="{{ route('setting.index') }}">
