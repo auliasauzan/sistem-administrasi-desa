@@ -11,10 +11,57 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        // Get generic user counts
         $totalUsers = \App\Models\User::count();
         $adminDesaCount = \App\Models\User::where('role', 'Admin Desa')->count();
         $perangkatDesaCount = \App\Models\User::where('role', 'Perangkat Desa')->count();
         $wargaCount = \App\Models\User::where('role', 'Warga')->count();
+
+        // New Card Metrics
+        $totalPenduduk = \App\Models\Resident::count();
+        $suratBulanIni = \App\Models\Letter::whereYear('created_at', now()->year)
+                                           ->whereMonth('created_at', now()->month)
+                                           ->count();
+        $pengaduanAktif = \App\Models\Complaint::whereIn('status', ['Menunggu', 'Diproses'])->count();
+
+        // Data for Chart 1: Jumlah Penduduk per RT (Bar chart)
+        $residentsPerRt = DB::table('residents')
+            ->join('families', 'residents.family_id', '=', 'families.id')
+            ->select('families.neighborhood as rt', DB::raw('count(residents.id) as total'))
+            ->groupBy('families.neighborhood')
+            ->get();
+        $chartRtLabels = $residentsPerRt->pluck('rt');
+        $chartRtData = $residentsPerRt->pluck('total');
+
+        // Data for Chart 2: Status Surat (Pie chart)
+        // using enum: 'Menunggu', 'Diproses', 'Selesai', 'Ditolak'
+        $lettersStatus = DB::table('letters')
+            ->select('status', DB::raw('count(id) as total'))
+            ->groupBy('status')
+            ->get();
+        $chartLetterLabels = $lettersStatus->pluck('status');
+        $chartLetterData = $lettersStatus->pluck('total');
+
+        // Data for Chart 3: Realisasi vs Anggaran per Kategori (Bar chart)
+        $budgets = DB::table('budgets')
+            ->select('category', DB::raw('SUM(amount) as total_anggaran'))
+            ->groupBy('category')
+            ->get();
+        $chartBudgetLabels = $budgets->pluck('category');
+        $chartBudgetAnggaran = $budgets->pluck('total_anggaran');
+        // Mock Realisasi (e.g. 75% to 95% of Anggaran)
+        $chartBudgetRealisasi = $budgets->map(function ($item) {
+            $percentage = rand(75, 95) / 100;
+            return $item->total_anggaran * $percentage;
+        });
+
+        // Data for Chart 4: Jumlah Pengaduan per status (Pie chart)
+        $complaintsStatus = DB::table('complaints')
+            ->select('status', DB::raw('count(id) as total'))
+            ->groupBy('status')
+            ->get();
+        $chartComplaintLabels = $complaintsStatus->pluck('status');
+        $chartComplaintData = $complaintsStatus->pluck('total');
 
         return view('dashboard.index', [
             'title' => 'Dashboard',
@@ -22,6 +69,20 @@ class DashboardController extends Controller
             'adminDesaCount' => $adminDesaCount,
             'perangkatDesaCount' => $perangkatDesaCount,
             'wargaCount' => $wargaCount,
+            
+            // new variables
+            'totalPenduduk' => $totalPenduduk,
+            'suratBulanIni' => $suratBulanIni,
+            'pengaduanAktif' => $pengaduanAktif,
+            'chartRtLabels' => $chartRtLabels,
+            'chartRtData' => $chartRtData,
+            'chartLetterLabels' => $chartLetterLabels,
+            'chartLetterData' => $chartLetterData,
+            'chartBudgetLabels' => $chartBudgetLabels,
+            'chartBudgetAnggaran' => $chartBudgetAnggaran,
+            'chartBudgetRealisasi' => $chartBudgetRealisasi,
+            'chartComplaintLabels' => $chartComplaintLabels,
+            'chartComplaintData' => $chartComplaintData,
         ]);
     }
 

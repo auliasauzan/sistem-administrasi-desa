@@ -28,26 +28,20 @@
         </div>
     </div>
 
-    <!-- Statistics Cards -->
+    <!-- New Statistics Cards -->
     <div class="row g-4 mb-4">
         <div class="col-md-4">
             <div class="card shadow-sm border-0 h-100">
                 <div class="card-body p-4">
                     <div class="d-flex align-items-center justify-content-between">
                         <div>
-                            <p class="text-muted mb-1 small">Total Users</p>
-                            <h2 class="fw-bold mb-0">{{ $totalUsers }}</h2>
+                            <p class="text-muted mb-1 small">Total Penduduk</p>
+                            <h2 class="fw-bold mb-0">{{ $totalPenduduk }}</h2>
                         </div>
                         <div class="bg-primary bg-opacity-10 rounded-circle p-3">
-                            <i class='bx bx-user fs-2 text-primary'></i>
+                            <i class='bx bx-group fs-2 text-primary'></i>
                         </div>
                     </div>
-                </div>
-                <div class="card-footer bg-primary bg-opacity-10 border-0 py-2">
-                    <small class="text-primary fw-semibold">
-                        <i class='bx bx-trending-up me-1'></i>
-                        All registered users
-                    </small>
                 </div>
             </div>
         </div>
@@ -57,174 +51,76 @@
                 <div class="card-body p-4">
                     <div class="d-flex align-items-center justify-content-between">
                         <div>
-                            <p class="text-muted mb-1 small">Admin Desa</p>
-                            <h2 class="fw-bold mb-0">{{ $adminDesaCount }}</h2>
+                            <p class="text-muted mb-1 small">Surat Bulan Ini</p>
+                            <h2 class="fw-bold mb-0">{{ $suratBulanIni }}</h2>
                         </div>
                         <div class="bg-success bg-opacity-10 rounded-circle p-3">
-                            <i class='bx bx-shield fs-2 text-success'></i>
+                            <i class='bx bx-envelope fs-2 text-success'></i>
                         </div>
                     </div>
-                </div>
-                <div class="card-footer bg-success bg-opacity-10 border-0 py-2">
-                    <small class="text-success fw-semibold">
-                        <i class='bx bx-check-circle me-1'></i>
-                        Kepala & Administrator Desa
-                    </small>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4 mt-4 mt-md-0">
+        <div class="col-md-4">
             <div class="card shadow-sm border-0 h-100">
                 <div class="card-body p-4">
                     <div class="d-flex align-items-center justify-content-between">
                         <div>
-                            <p class="text-muted mb-1 small">Perangkat Desa</p>
-                            <h2 class="fw-bold mb-0">{{ $perangkatDesaCount }}</h2>
+                            <p class="text-muted mb-1 small">Pengaduan Aktif</p>
+                            <h2 class="fw-bold mb-0">{{ $pengaduanAktif }}</h2>
                         </div>
-                        <div class="bg-info bg-opacity-10 rounded-circle p-3">
-                            <i class='bx bx-user-check fs-2 text-info'></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer bg-info bg-opacity-10 border-0 py-2">
-                    <small class="text-info fw-semibold">
-                        <i class='bx bx-user-circle me-1'></i>
-                        Staf & Perangkat Desa
-                    </small>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4 mt-4">
-            <div class="card shadow-sm border-0 h-100">
-                <div class="card-body p-4">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div>
-                            <p class="text-muted mb-1 small">Warga</p>
-                            <h2 class="fw-bold mb-0">{{ $wargaCount }}</h2>
-                        </div>
-                        <div class="bg-warning bg-opacity-10 rounded-circle p-3">
-                            <i class='bx bx-group fs-2 text-warning'></i>
+                        <div class="bg-danger bg-opacity-10 rounded-circle p-3">
+                            <i class='bx bx-message-error fs-2 text-danger'></i>
                         </div>
                     </div>
-                </div>
-                <div class="card-footer bg-warning bg-opacity-10 border-0 py-2">
-                    <small class="text-warning fw-semibold">
-                        <i class='bx bx-group me-1'></i>
-                        Warga Terdaftar
-                    </small>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Quick Actions -->
-    <div class="card shadow-sm border-0 mb-4">
-        <div class="card-header bg-white border-bottom">
-            <h5 class="mb-0 fw-bold">
-                <i class='bx bx-rocket me-2 text-primary'></i>
-                Quick Actions
-            </h5>
+    <!-- Charts -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-header bg-white">
+                    <h6 class="mb-0 fw-bold">Populasi Penduduk per Wilayah</h6>
+                </div>
+                <div class="card-body">
+                    <canvas id="rtChart" style="max-height: 300px;"></canvas>
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-            <div class="row g-3 mt-2">
-                <div class="col-md-3">
-                    <a href="{{ route('user.index') }}" class="text-decoration-none">
-                        <div class="card border border-primary border-opacity-25 h-100 hover-shadow">
-                            <div class="card-body text-center mt-4">
-                                <i class='bx bx-user-plus fs-1 text-primary mb-2'></i>
-                                <h6 class="mb-0">Manage Users</h6>
-                            </div>
-                        </div>
-                    </a>
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-header bg-white">
+                    <h6 class="mb-0 fw-bold">Status Surat Pengantar</h6>
                 </div>
-                <div class="col-md-3">
-                    <a href="{{ route('setting.index') }}" class="text-decoration-none">
-                        <div class="card border border-success border-opacity-25 h-100 hover-shadow">
-                            <div class="card-body text-center mt-4"">
-                                <i class='bx bx-cog fs-1 text-success mb-2'></i>
-                                <h6 class=" mb-0">Settings</h6>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <a href="{{ route('dashboard.show') }}" class="text-decoration-none">
-                        <div class="card border border-info border-opacity-25 h-100 hover-shadow">
-                            <div class="card-body text-center mt-4"">
-                                <i class='bx bx-user-circle fs-1 text-info mb-2'></i>
-                                <h6 class=" mb-0">My Profile</h6>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <a href="{{ route('dashboard.edit') }}" class="text-decoration-none">
-                        <div class="card border border-warning border-opacity-25 h-100 hover-shadow">
-                            <div class="card-body text-center mt-4"">
-                                <i class='bx bx-edit fs-1 text-warning mb-2'></i>
-                                <h6 class=" mb-0">Edit Profile</h6>
-                            </div>
-                        </div>
-                    </a>
+                <div class="card-body">
+                    <canvas id="letterChart" style="max-height: 300px;"></canvas>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- System Information -->
-    <div class="row g-3">
+    <div class="row g-4 mb-4">
         <div class="col-md-6">
-            <div class="card shadow-sm border-0">
-                <div class="card-header bg-white border-bottom">
-                    <h6 class="mb-0 fw-bold">
-                        <i class='bx bx-info-circle me-2 text-primary'></i>
-                        System Information
-                    </h6>
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-header bg-white">
+                    <h6 class="mb-0 fw-bold">Realisasi vs Anggaran per Kategori (Mock)</h6>
                 </div>
                 <div class="card-body">
-                    <ul class="list-unstyled mb-0 pt-4">
-                        <li class="mb-2">
-                            <i class='bx bx-check-circle text-success me-2'></i>
-                            <strong>Laravel Version:</strong> {{ app()->version() }}
-                        </li>
-                        <li class="mb-2">
-                            <i class='bx bx-check-circle text-success me-2'></i>
-                            <strong>PHP Version:</strong> {{ PHP_VERSION }}
-                        </li>
-                        <li class="mb-2">
-                            <i class='bx bx-check-circle text-success me-2'></i>
-                            <strong>Environment:</strong> {{ config('app.env') }}
-                        </li>
-                    </ul>
+                    <canvas id="budgetChart" style="max-height: 300px;"></canvas>
                 </div>
             </div>
         </div>
-
         <div class="col-md-6">
-            <div class="card shadow-sm border-0 pt-4">
-                <div class="card-header bg-white border-bottom">
-                    <h6 class="mb-0 fw-bold">
-                        <i class='bx bx-user me-2 text-primary'></i>
-                        Your Account
-                    </h6>
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-header bg-white">
+                    <h6 class="mb-0 fw-bold">Status Pengaduan Warga</h6>
                 </div>
                 <div class="card-body">
-                    <ul class="list-unstyled mb-0">
-                        <li class="mb-2">
-                            <i class='bx bx-envelope text-primary me-2'></i>
-                            <strong>Email:</strong> {{ Auth::user()->email }}
-                        </li>
-                        <li class="mb-2">
-                            <i class='bx bx-calendar text-primary me-2'></i>
-                            <strong>Member Since:</strong> {{ Auth::user()->created_at->format('d M Y') }}
-                        </li>
-                        <li class="mb-2">
-                            <i class='bx bx-time text-primary me-2'></i>
-                            <strong>Last Updated:</strong> {{ Auth::user()->updated_at->diffForHumans() }}
-                        </li>
-                    </ul>
+                    <canvas id="complaintChart" style="max-height: 300px;"></canvas>
                 </div>
             </div>
         </div>
@@ -235,6 +131,98 @@
     @endpush
 
     @push('scripts')
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Chart 1: Penduduk per RT (Bar Chart)
+            const ctxRt = document.getElementById('rtChart').getContext('2d');
+            new Chart(ctxRt, {
+                type: 'bar',
+                data: {
+                    labels: {!! json_encode($chartRtLabels) !!},
+                    datasets: [{
+                        label: 'Jumlah Penduduk',
+                        data: {!! json_encode($chartRtData) !!},
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
+                }
+            });
+
+            // Chart 2: Status Surat (Pie Chart)
+            const ctxLetter = document.getElementById('letterChart').getContext('2d');
+            new Chart(ctxLetter, {
+                type: 'pie',
+                data: {
+                    labels: {!! json_encode($chartLetterLabels) !!},
+                    datasets: [{
+                        data: {!! json_encode($chartLetterData) !!},
+                        backgroundColor: [
+                            'rgba(255, 206, 86, 0.6)', // Menunggu (Yellow)
+                            'rgba(54, 162, 235, 0.6)', // Diproses (Blue)
+                            'rgba(75, 192, 192, 0.6)', // Selesai (Green)
+                            'rgba(255, 99, 132, 0.6)'  // Ditolak (Red)
+                        ]
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
+
+            // Chart 3: Realisasi vs Anggaran (Bar Chart Grouped)
+            const ctxBudget = document.getElementById('budgetChart').getContext('2d');
+            new Chart(ctxBudget, {
+                type: 'bar',
+                data: {
+                    labels: {!! json_encode($chartBudgetLabels) !!},
+                    datasets: [
+                        {
+                            label: 'Anggaran (Rp)',
+                            data: {!! json_encode($chartBudgetAnggaran) !!},
+                            backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Realisasi (Rp) *Mock',
+                            data: {!! json_encode($chartBudgetRealisasi) !!},
+                            backgroundColor: 'rgba(153, 102, 255, 0.6)',
+                            borderColor: 'rgba(153, 102, 255, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+
+            // Chart 4: Status Pengaduan (Pie Chart)
+            const ctxComplaint = document.getElementById('complaintChart').getContext('2d');
+            new Chart(ctxComplaint, {
+                type: 'pie',
+                data: {
+                    labels: {!! json_encode($chartComplaintLabels) !!},
+                    datasets: [{
+                        data: {!! json_encode($chartComplaintData) !!},
+                        backgroundColor: [
+                            'rgba(255, 159, 64, 0.6)', // Orange
+                            'rgba(54, 162, 235, 0.6)', // Blue
+                            'rgba(75, 192, 192, 0.6)', // Green
+                            'rgba(255, 99, 132, 0.6)'  // Red
+                        ]
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
+        });
+    </script>
     @endpush
 
 </x-app>
